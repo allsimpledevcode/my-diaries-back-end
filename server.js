@@ -1,11 +1,16 @@
 const express = require("express");
-const app = express();
 const bodyparser = require("body-parser");
-const port = process.env.PORT || 3200;
+const path = require('path')
 const cors = require('cors');
+const app = express();
+const port = process.env.PORT || 3000;
 
 const BlogController = require('./Controller/blogController');
 require('./Config/db');
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname + './index.html'));
+});
 
 app.use(cors({credentials: true, origin: true }));
 app.options('*', cors());
