@@ -195,7 +195,7 @@
         "photoUrls"
       ],
       "properties": {
-        "_id": {
+        "uuid": {
           "type": "string"
         },
         "title": {

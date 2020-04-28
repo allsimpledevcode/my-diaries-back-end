@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/:id', function (req, res) {
-  Blog.findById(req.params.id, function (err, blog) {
+  Blog.findOne({"uuid": req.params.id}, function (err, blog) {
       if (err) return res.status(500).send("There was a problem finding the blog.");
       if (!blog) return res.status(404).send("No blog found.");
       res.status(200).send(blog);
@@ -29,14 +29,14 @@ router.post('/', function (req, res) {
 });
 
 router.put('/:id', function (req, res) {
-  Blog.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, blog) {
+  Blog.findOneAndUpdate({uuid: req.params.id}, req.body, {new: true}, function (err, blog) {
       if (err) return res.status(500).send("There was a problem updating the blog.");
       res.status(200).send(blog);
   });
 });
 
 router.delete('/:id', function (req, res) {
-  Blog.findByIdAndRemove(req.params.id, function (err, blog) {
+  Blog.findOneAndRemove({uuid: req.params.id}, function (err, blog) {
       if (err) return res.status(500).send("There was a problem deleting the blog.");
       res.status(200).send("blog: "+ blog.title +" was deleted.");
   });
