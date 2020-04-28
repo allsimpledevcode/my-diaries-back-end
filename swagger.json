@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "First my fun project REST API in NodeJS",
+    "description": "My first fun project REST API in nodeJS",
     "version": "1.0.0",
     "title": "REST API in Node JS"
   },
