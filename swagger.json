@@ -77,7 +77,7 @@
       }
     },
 
-    "/blogs/{blogsId}": {
+    "/blogs/{blogId}": {
       "get": {
         "tags": [
           "blogs"
@@ -91,12 +91,11 @@
         ],
         "parameters": [
           {
-            "name": "_id",
+            "name": "blogId",
             "in": "path",
             "description": "ID of blog to return",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         ],
         "responses": {
@@ -112,12 +111,7 @@
           "404": {
             "description": "blog not found"
           }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
+        }
       },
       "put": {
         "tags": [
@@ -139,18 +133,17 @@
             "in": "path",
             "description": "ID of blog that needs to be updated",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           },
           {
-            "name": "name",
+            "name": "title",
             "in": "formData",
             "description": "Updated name of the blog",
             "required": false,
             "type": "string"
           },
           {
-            "name": "status",
+            "name": "content",
             "in": "formData",
             "description": "Updated status of the blog",
             "required": false,
@@ -176,18 +169,11 @@
         ],
         "parameters": [
           {
-            "name": "api_key",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "blogId",
             "in": "path",
             "description": "blog id to delete",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         ],
         "responses": {
