@@ -93,7 +93,7 @@
           {
             "name": "blogId",
             "in": "path",
-            "description": "ID of blog to return",
+            "description": "UUID of blog to return",
             "required": true,
             "type": "string"
           }
@@ -131,7 +131,7 @@
           {
             "name": "blogId",
             "in": "path",
-            "description": "ID of blog that needs to be updated",
+            "description": "UUID of blog that needs to be updated",
             "required": true,
             "type": "string"
           },
@@ -139,14 +139,14 @@
             "name": "title",
             "in": "formData",
             "description": "Updated name of the blog",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
             "name": "content",
             "in": "formData",
             "description": "Updated status of the blog",
-            "required": false,
+            "required": true,
             "type": "string"
           }
         ],
@@ -171,7 +171,7 @@
           {
             "name": "blogId",
             "in": "path",
-            "description": "blog id to delete",
+            "description": "UUID to delete",
             "required": true,
             "type": "string"
           }
@@ -200,11 +200,13 @@
         },
         "title": {
           "type": "First blog",
-          "example": "doggie"
+          "example": "doggie",
+          "required": true
         },
         "content": {
           "type": "string",
-          "example": "My first blog description"
+          "example": "My first blog description",
+          "required": true
         }
       },
       "xml": {
