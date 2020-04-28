@@ -1,0 +1,232 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "First my fun project REST API in NodeJS",
+    "version": "1.0.0",
+    "title": "REST API in Node JS"
+  },
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "blogs",
+      "description": "Everything about your Blogs"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/blogs": {     
+      "get": {
+        "tags": [
+          "blogs"
+        ],
+        "summary": "Find all the blogs",
+        "description": "Returns a all blogs",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/blogs"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "blog not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "blogs"
+        ],
+        "summary": "Add a new blog",
+        "description": "",
+        "operationId": "addblog",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "blog object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/blogs"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+
+    "/blogs/{blogsId}": {
+      "get": {
+        "tags": [
+          "blogs"
+        ],
+        "summary": "Find blog by ID",
+        "description": "Returns a single blog",
+        "operationId": "getblogById",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "description": "ID of blog to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/blogs"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "blog not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "blogs"
+        ],
+        "summary": "Updates a blog in the store with form data",
+        "description": "",
+        "operationId": "updateblogWithForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "blogId",
+            "in": "path",
+            "description": "ID of blog that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Updated name of the blog",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "formData",
+            "description": "Updated status of the blog",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "blogs"
+        ],
+        "summary": "Deletes a blog",
+        "description": "",
+        "operationId": "deleteblog",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "blogId",
+            "in": "path",
+            "description": "blog id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "blog not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "blogs": {
+      "type": "object",
+      "required": [
+        "title",
+        "photoUrls"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "First blog",
+          "example": "doggie"
+        },
+        "content": {
+          "type": "string",
+          "example": "My first blog description"
+        }
+      },
+      "xml": {
+        "name": "blogs"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "REST API in NodeJS"
+  }
+}

@@ -1,11 +1,10 @@
-// User.js
 const mongoose = require('mongoose');  
 
-const UserSchema = new mongoose.Schema({  
+const BlogSchema = new mongoose.Schema({  
   title: String,
   content: String
-});
+},{ versionKey: false });
 
-mongoose.model('blog', UserSchema);
+mongoose.model('blog', BlogSchema);
 
 module.exports = mongoose.model('blog');
