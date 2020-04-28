@@ -12,10 +12,6 @@
       "description": "Everything about your Blogs"
     }
   ],
-  "schemes": [
-    "http",
-    "https"
-  ],
   "paths": {
     "/blogs": {     
       "get": {
