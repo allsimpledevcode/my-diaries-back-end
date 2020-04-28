@@ -4,7 +4,6 @@ const express = require("express");
 const bodyparser = require("body-parser");
 const cors = require('cors');
 const app = express();
-const path = require('path');
 const port = process.env.PORT || 3000;
 const BlogController = require('./Controller/blogController');
 const swaggerUi = require('swagger-ui-express');
