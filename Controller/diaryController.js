@@ -1,7 +1,7 @@
 const Diary = require('../Model/diaryModel');
 
 exports.getAllDiaries = (req, res) => {
-  Diary.find({}, function (err, Diaries) {
+  Diary.find({}).sort({updated_at: 'desc'}).exec(function (err, Diaries) {
       if (err) return res.status(500).send("There was a problem finding the Diaries.");
       res.status(200).send(Diaries);
   });
