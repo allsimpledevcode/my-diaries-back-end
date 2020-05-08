@@ -7,6 +7,15 @@ routers
   .get(DiaryController.getAllDiaries)
   .post(DiaryController.createDiary);
 
+
+routers
+  .route("/favourites")
+  .get(DiaryController.getAllFavouritesDiaries)
+
+routers
+  .route("/tags/:id")
+  .get(DiaryController.getDiariesByTag)
+
 routers
   .route("/:id")
   .get(DiaryController.getDiary)

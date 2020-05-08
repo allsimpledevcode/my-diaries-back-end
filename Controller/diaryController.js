@@ -25,11 +25,33 @@ exports.getAllDiaries = (req, res) => {
   });
 }
 
+exports.getAllFavouritesDiaries = (req, res) => {
+  const { page, perPage } = req.query;
+  const options = {
+    page: parseInt(page, 10) || 1,
+    limit: parseInt(perPage, 10) || 10,
+    sort: { 'updated_at': -1 },
+    customLabels: myCustomLabels
+  };
+  Diary.paginate({ favorite: true }, options, function (err, Diaries) {
+      if (err) return res.status(500).send("There was a problem finding the Diaries.");
+      res.status(200).send(Diaries);
+  });
+}
+
+exports.getDiariesByTag = (req, res) => {
+  Diary.paginate({ tags: req.params.id }, options, function (err, Diaries) {
+      if (err) return res.status(500).send("There was a problem finding the Diaries.");
+      res.status(200).send(Diaries);
+  });
+}
+
 exports.createDiary = (req, res) => {
   Diary.create({
       title : req.body.title,
       content : req.body.content,
-      favorite: req.body.favorite
+      favorite: req.body.favorite,
+      tags: req.body.tags
   }, 
   function (err, blog) {
       if (err) return res.status(500).send("There was a problem adding the information to the database.");

@@ -5,6 +5,7 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 const DiarySchema = new Schema({  
   title: String,
   content: String,
+  tags: Array,
   favorite: {
     type: 'boolean', default: false
   }
