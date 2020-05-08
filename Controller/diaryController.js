@@ -28,7 +28,8 @@ exports.getAllDiaries = (req, res) => {
 exports.createDiary = (req, res) => {
   Diary.create({
       title : req.body.title,
-      content : req.body.content
+      content : req.body.content,
+      favorite: req.body.favorite
   }, 
   function (err, blog) {
       if (err) return res.status(500).send("There was a problem adding the information to the database.");
