@@ -1,7 +1,25 @@
 const Diary = require('../Model/diaryModel');
 
+const myCustomLabels = {
+  totalDocs: 'totalCount',
+  docs: 'diaries',
+  limit: 'perPage',
+  page: 'currentPage',
+  nextPage: 'next',
+  prevPage: 'prev',
+  totalPages: 'pageCount'
+};
+
+
 exports.getAllDiaries = (req, res) => {
-  Diary.find({}).sort({updated_at: 'desc'}).exec(function (err, Diaries) {
+  const { page, perPage } = req.query;
+  const options = {
+    page: parseInt(page, 10) || 1,
+    limit: parseInt(perPage, 10) || 10,
+    sort: { 'updated_at': -1 },
+    customLabels: myCustomLabels
+  };
+  Diary.paginate({}, options, function (err, Diaries) {
       if (err) return res.status(500).send("There was a problem finding the Diaries.");
       res.status(200).send(Diaries);
   });
