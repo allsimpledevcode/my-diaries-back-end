@@ -35,7 +35,7 @@ exports.getAllFavouritesDiaries = (req, res) => {
     sort: { 'updated_at': -1 },
     customLabels: myCustomLabels
   };
-  Diary.paginate({ title: {$regex: query || '', $options: "i" } }, { favorite: true }, options, function (err, Diaries) {
+  Diary.paginate({ favorite: true, title: {$regex: query || '', $options: "i" } }, options, function (err, Diaries) {
       if (err) return res.status(500).send("There was a problem finding the Diaries.");
       res.status(200).send(Diaries);
   });
