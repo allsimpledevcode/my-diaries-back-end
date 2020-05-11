@@ -15,8 +15,8 @@ const myCustomLabels = {
 exports.getAllDiaries = (req, res) => {
   const { page, perPage, query } = req.query;
   const options = {
-    page: parseInt(page, 3) || 1,
-    limit: parseInt(perPage, 3) || 3,
+    page: parseInt(page, 10) || 1,
+    limit: parseInt(perPage, 10) || 10,
     sort: { 'updated_at': -1 },
     customLabels: myCustomLabels
   };
@@ -30,8 +30,8 @@ exports.getAllDiaries = (req, res) => {
 exports.getAllFavouritesDiaries = (req, res) => {
   const { page, perPage, query } = req.query;
   const options = {
-    page: parseInt(page, 3) || 1,
-    limit: parseInt(perPage, 3) || 3,
+    page: parseInt(page, 10) || 1,
+    limit: parseInt(perPage, 10) || 10,
     sort: { 'updated_at': -1 },
     customLabels: myCustomLabels
   };
