@@ -7,33 +7,35 @@ const myCustomLabels = {
   page: 'currentPage',
   nextPage: 'next',
   prevPage: 'prev',
-  totalPages: 'pageCount'
+  totalPages: 'pageCount',
+  meta: 'meta'
 };
 
 
 exports.getAllDiaries = (req, res) => {
-  const { page, perPage } = req.query;
+  const { page, perPage, query } = req.query;
   const options = {
-    page: parseInt(page, 10) || 1,
-    limit: parseInt(perPage, 10) || 10,
+    page: parseInt(page, 3) || 1,
+    limit: parseInt(perPage, 3) || 3,
     sort: { 'updated_at': -1 },
     customLabels: myCustomLabels
   };
-  Diary.paginate({}, options, function (err, Diaries) {
+  
+  Diary.paginate({ title: {$regex: query || '', $options: "i" } } , options, function (err, Diaries) {
       if (err) return res.status(500).send("There was a problem finding the Diaries.");
       res.status(200).send(Diaries);
   });
 }
 
 exports.getAllFavouritesDiaries = (req, res) => {
-  const { page, perPage } = req.query;
+  const { page, perPage, query } = req.query;
   const options = {
-    page: parseInt(page, 10) || 1,
-    limit: parseInt(perPage, 10) || 10,
+    page: parseInt(page, 3) || 1,
+    limit: parseInt(perPage, 3) || 3,
     sort: { 'updated_at': -1 },
     customLabels: myCustomLabels
   };
-  Diary.paginate({ favorite: true }, options, function (err, Diaries) {
+  Diary.paginate({ title: {$regex: query || '', $options: "i" } }, { favorite: true }, options, function (err, Diaries) {
       if (err) return res.status(500).send("There was a problem finding the Diaries.");
       res.status(200).send(Diaries);
   });
