@@ -6,7 +6,7 @@ const BlogSchema = new Schema({
   uuid: { type: 'string', default: uuidv4(), unique: true },
   title: String,
   content: String
-},{ versionKey: false });
+}, { versionKey: false });
 
 BlogSchema.methods.toJSON = function() {
   var obj = this.toObject();
