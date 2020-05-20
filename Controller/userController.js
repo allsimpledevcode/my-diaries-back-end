@@ -15,7 +15,8 @@ exports.createNewUser = (req, res) => {
   }, (err, user) => {
     if (user) {
       return res.status(200).send({
-        message: "User already exist"
+        message: "An account already exists for this email.",
+        status: 403
       })
     } else if (err) {
       return res.status(500).send(err);
@@ -27,7 +28,7 @@ exports.createNewUser = (req, res) => {
           var token = new Token({ userId: user._id, token: user.salt });          
           Token.create(token, function(err, tokenData){
             if (err) { return res.status(500).send({ msg: err.message }); }
-            var verifyURL = `http://${req.headers.host}/verify?token=${tokenData.token}`;
+            var verifyURL = `http://${req.headers.origin}/verify?token=${tokenData.token}`;
             const msg = {
               to: user.email,
               from: 'support@lakshmananarumugam.com',
@@ -65,7 +66,7 @@ exports.authExistUser = (req, res) => {
     if (err) {
       return res.status(500).send("There was a problem adding the information to the database.");
     } else if (user === null) {
-      return res.status(400).send("User not found");
+      return res.status(401).send("User not found");
     } else {
       if (user.validPassword(req.body.password)) {
         return res.status(201).send({
@@ -87,9 +88,9 @@ exports.forgotUserPassword = (req, res) => {
     email: req.body.email
   }, function (err, user) {
     if (err) {
-      return res.status(500).send("There was a problem adding the information to the database.");
+      return res.status(500).send(err);
     } else if (user === null) {
-      return res.status(400).send("User not found");
+      return res.status(401).send("User not found");
     } else {
       // const msg = {
       //   to: user.email,
